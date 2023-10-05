@@ -1,16 +1,16 @@
-# proj
+# MyPhoto
 
-A new Flutter project.
+flutter로 작성된 jepg 컨버팅, 관리 앱.
 
-## Getting Started
+## 예정된 기능
+-이미지에 다음 옵션을 적용가능
+--border(굵기, 색상)
+--exif(폰트 크기, 색상)
+--exif는 모델명, 초점거리, ISO, F-stop, 노출시간 지원
+--jpeg to webp convert
 
-This project is a starting point for a Flutter application.
+-관리 기능에는 다음이 추가될 예정
+--관리할 폴더 추가.
+--관리할 폴더의 이미지들의 exif를 읽어 필터링 가능
+--해당 관리 페이지에서 바로 이미지 공유 가능
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
