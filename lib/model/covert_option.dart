@@ -12,7 +12,3 @@ class ConvertOption {
 enum ImageRatio{
   RATIO_3_2, RATIO_16_9, RATIO_1_1, RATIO_4_3
 }
-
-const RATIO_3_2 = 0;
-const RATIO_16_9 = 1;
-const RATIO_4_3 = 2;

@@ -1,9 +1,10 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:proj/const/colors.dart';
 import 'package:proj/item/image_grid.dart';
-import 'package:proj/model/covert_option.dart';
+import 'package:proj/view_model/ConvertedImageViewModel.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -21,8 +22,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: Home()
-    );
+        home: Home());
   }
 }
 
@@ -36,12 +36,11 @@ class Home extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: MultiProvider(
             providers: [
-              ChangeNotifierProvider(create: (_) => GridImageProvider()),
-              ChangeNotifierProvider(create: (_) => ConvertOptionProvider())
+              ChangeNotifierProvider(create: (_) => ConvertedImageViewModel()),
+              ChangeNotifierProvider(create: (_) => ConvertOptionViewModel())
             ],
             child: HomeBody(),
-          )
-      ),
+          )),
     );
   }
 
@@ -64,12 +63,15 @@ class Home extends StatelessWidget {
 class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final imageProvider = Provider.of<GridImageProvider>(context);
+    final imageProvider = Provider.of<ConvertedImageViewModel>(context);
 
     return Column(
       children: [
         Flexible(child: ImageGrid()),
-        Divider(thickness: 1, color: Colors.black12,),
+        Divider(
+          thickness: 1,
+          color: Colors.black12,
+        ),
         SizedBox(
           height: 5,
         ),
@@ -81,7 +83,7 @@ class HomeBody extends StatelessWidget {
               onPressed: () async {
                 final picker = ImagePicker();
                 final pickedFile =
-                await picker.pickImage(source: ImageSource.gallery);
+                    await picker.pickImage(source: ImageSource.gallery);
 
                 if (pickedFile != null) {
                   final imageFile = File(pickedFile.path);
@@ -90,7 +92,9 @@ class HomeBody extends StatelessWidget {
               },
               child: Text("추가"),
             ),
-            SizedBox(width: 8,),
+            SizedBox(
+              width: 8,
+            ),
             ElevatedButton(
               onPressed: () {},
               child: Text("변환"),
@@ -103,34 +107,34 @@ class HomeBody extends StatelessWidget {
       ],
     );
   }
+
+
 }
 
-class GridImageProvider extends ChangeNotifier {
-  List<File> pickImages = [];
+// class GridImageProvider extends ChangeNotifier {
+//   List<File> pickImages = [];
+//
+//   Future<void> addImage(File file) async {
+//     pickImages.add(file);
+//     notifyListeners();
+//   }
+// }
 
-  Future<void> addImage(File file) async {
-    pickImages.add(file);
-    notifyListeners();
-  }
-}
-
-class ConvertOptionProvider extends ChangeNotifier {
-  final ConvertOption _option = ConvertOption(borderHorizontal: 1, borderVertical: 1, ratioOption: ImageRatio.RATIO_3_2);
-
-  void setBorderHotizontal(double value){
-    _option.borderHorizontal = value;
-    notifyListeners();
-  }
-
-  void setBorderVertical(double value){
-    _option.borderVertical = value;
-    notifyListeners();
-  }
-
-  void setRatioOption(ImageRatio value){
-    _option.ratioOption = value;
-    notifyListeners();
-  }
-}
-
-
+// class ConvertOptionProvider extends ChangeNotifier {
+//   final ConvertOption _option = ConvertOption(borderHorizontal: 1, borderVertical: 1, ratioOption: ImageRatio.RATIO_3_2);
+//
+//   void setBorderHotizontal(double value){
+//     _option.borderHorizontal = value;
+//     notifyListeners();
+//   }
+//
+//   void setBorderVertical(double value){
+//     _option.borderVertical = value;
+//     notifyListeners();
+//   }
+//
+//   void setRatioOption(ImageRatio value){
+//     _option.ratioOption = value;
+//     notifyListeners();
+//   }
+// }
